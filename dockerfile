@@ -2,12 +2,11 @@ FROM python:3.11-slim
 
 WORKDIR /app
 
-COPY app/requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt
+COPY app.py .
+COPY templates templates
 
-COPY app/ .
+RUN pip install flask
 
-ENV PORT=8080
 EXPOSE 8080
 
-CMD ["gunicorn", "-b", "0.0.0.0:8080", "main:app"]
+CMD ["python", "app.py"]
