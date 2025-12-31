@@ -26,6 +26,18 @@ jobs:
     - name: Setup gcloud
       uses: google-github-actions/setup-gcloud@v2
 
+    - name: Terraform Init
+      working-directory: terraform
+      run: terraform init
+
+    - name: Terraform Apply (Infra only)
+      working-directory: terraform
+      run: |
+        terraform apply -auto-approve \
+          -var="project_id=$PROJECT_ID" \
+          -var="region=$REGION" \
+          -var="image=gcr.io/cloudrun/hello"
+
     - name: Configure Docker
       run: gcloud auth configure-docker europe-west1-docker.pkg.dev --quiet
 
@@ -34,11 +46,7 @@ jobs:
         docker build -t $IMAGE:$GITHUB_SHA .
         docker push $IMAGE:$GITHUB_SHA
 
-    - name: Terraform Init
-      working-directory: terraform
-      run: terraform init
-
-    - name: Terraform Apply
+    - name: Terraform Apply (Deploy app)
       working-directory: terraform
       run: |
         terraform apply -auto-approve \
