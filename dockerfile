@@ -2,11 +2,10 @@ FROM python:3.11-slim
 
 WORKDIR /app
 
-COPY app.py .
-COPY templates templates
+COPY app/ .
 
 RUN pip install flask
 
 EXPOSE 8080
 
-CMD ["python", "app.py"]
+CMD ["python", "main.py"]
