@@ -11,8 +11,8 @@ jobs:
 
     env:
       PROJECT_ID: devops-handson-482913
-      REGION: europe-west1
-      IMAGE: europe-west1-docker.pkg.dev/devops-handson-482913/devops-repo/app
+      REGION: europe-west2
+      IMAGE: europe-west2-docker.pkg.dev/devops-handson-482913/devops-repo/app
 
     steps:
     - name: Checkout
@@ -44,7 +44,7 @@ jobs:
           -var="image=gcr.io/cloudrun/hello"
 
     - name: Configure Docker
-      run: gcloud auth configure-docker europe-west1-docker.pkg.dev --quiet
+      run: gcloud auth configure-docker europe-west2-docker.pkg.dev --quiet
 
     - name: Build & Push Image
       run: |
@@ -58,3 +58,4 @@ jobs:
           -var="project_id=$PROJECT_ID" \
           -var="region=$REGION" \
           -var="image=$IMAGE:$GITHUB_SHA"
+
