@@ -1,4 +1,9 @@
 terraform {
+  backend "gcs" {
+    bucket  = "devops-handson-482913-terraform-state"
+    prefix  = "cloudrun"
+  }
+
   required_providers {
     google = {
       source  = "hashicorp/google"
@@ -45,3 +50,4 @@ resource "google_cloud_run_service_iam_member" "public" {
   role     = "roles/run.invoker"
   member   = "allUsers"
 }
+
