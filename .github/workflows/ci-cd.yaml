@@ -26,7 +26,6 @@ jobs:
     - name: Setup gcloud
       uses: google-github-actions/setup-gcloud@v2
 
-    # ✅ ADD THIS STEP
     - name: Setup Terraform
       uses: hashicorp/setup-terraform@v3
       with:
