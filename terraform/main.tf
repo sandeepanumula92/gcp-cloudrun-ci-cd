@@ -28,6 +28,11 @@ resource "google_cloud_run_service" "app" {
   location = var.region
 
   template {
+    metadata {
+      annotations = {
+        "autoscaling.knative.dev/maxScale" = "5"
+      }
+    }
     spec {
       containers {
         image = var.image
