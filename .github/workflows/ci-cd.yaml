@@ -48,7 +48,7 @@ jobs:
 
     - name: Build & Push Image
       run: |
-        docker build -t $IMAGE:$GITHUB_SHA .
+        docker build -t $IMAGE:$GITHUB_SHA ./app
         docker push $IMAGE:$GITHUB_SHA
 
     - name: Terraform Apply (Deploy app)
@@ -58,4 +58,3 @@ jobs:
           -var="project_id=$PROJECT_ID" \
           -var="region=$REGION" \
           -var="image=$IMAGE:$GITHUB_SHA"
-
